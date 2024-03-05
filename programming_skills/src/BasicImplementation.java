@@ -33,7 +33,7 @@ public class BasicImplementation {
             }
         }
 
-        System.out.println("Word 1: " + word1 + " Word 2: " + word2 + " Final String: " + finalString);
+        System.out.println("Word1: " + word1 + " Word2: " + word2 + " Final String: " + finalString);
         return finalString.toString();
     }
 
@@ -51,15 +51,16 @@ public class BasicImplementation {
      */
     public char findTheDifference(String s, String t) {
         for (char ch : s.toCharArray()) {
-            for(char c : t.toCharArray()) {
-                if(ch == c ) {
-                    String word = t.substring(0,t.indexOf(ch)) + t.substring(t.indexOf(ch) + 1);
+            for (char c : t.toCharArray()) {
+                if (ch == c) {
+                    String word = t.substring(0, t.indexOf(ch)) + t.substring(t.indexOf(ch) + 1);
                     t = word;
                     break;
                 }
             }
-
         }
+
+        System.out.println("S: " + s + " T: " + t + " result: " + t.charAt(0));
         return t.charAt(0);
 
         /**
@@ -74,5 +75,75 @@ public class BasicImplementation {
          */
     }
 
+    /**
+     * Given two strings needle and haystack, return the index of the first occurrence of needle in haystack,
+     * or -1 if needle is not part of haystack.
+     * <p>
+     * Input: haystack = "sadbutsad", needle = "sad"
+     * Output: 0
+     * Explanation: "sad" occurs at index 0 and 6.
+     * The first occurrence is at index 0, so we return 0.
+     */
+    public int strStr(String haystack, String needle) {
+        if (haystack.contains(needle)) {
+            int haystackLength = haystack.length();
+            int needleLength = needle.length();
+            boolean match = false;
+            for (int i = 0; i < haystackLength; i++) {
+                if (haystack.charAt(i) == needle.charAt(0)) {
+                    for (int j = 0; j < needleLength; j++) {
+                        if (haystack.charAt(i + j) == needle.charAt(j)) {
+                            match = true;
+                        } else {
+                            match = false;
+                            break;
+                        }
+                    }
+                    if (match) {
+                        System.out.println("Haystack:" + haystack + " Needle:" + needle + " Result:" + i);
+                        return i;
+                    }
+                }
+            }
+        } else {
+            System.out.println("Haystack:" + haystack + " Needle:" + needle + " Result:-1");
+            return -1;
+        }
+        System.out.println("Haystack:" + haystack + " Needle:" + needle + " Result:-1");
+        return -1;
+    }
 
+    /**
+     * Given two strings s and t,
+     * return true
+     * if t is an anagram of s, and false otherwise.
+     *
+     * Input: s = "anagram", t = "nagaram"
+     * Output: true
+     */
+    public boolean isAnagram(String s, String t) {
+        s = "aa";
+        t = "vv";
+        if (s.length() != t.length()) {
+            System.out.println("false");
+            return false;
+        }
+
+        char c = 0;
+        for(char cs : s.toCharArray())  c ^= cs;
+        for(char ct : t.toCharArray())  c ^= ct;
+
+
+        if (c == 0) {
+            System.out.println("true");
+            return true;
+        }
+         else if(s.charAt(0) != t.charAt(0)) {
+            System.out.println("false1");
+            return false;
+        }
+
+        System.out.println("false2");
+        return false;
+    }
 }
